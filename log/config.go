@@ -54,18 +54,20 @@ func LoadConfigJsonStr(configStr string) {
 }
 
 func loadAppender(config AppenderConfig) {
+	var tmp Appender
 	switch config.Type {
 	case AppenderTypeConsole:
-		tmp := newConsoleAppender()
-		tmp.SetLevel(config.Levels)
-		_appenders[config.Name] = tmp
+		tmp = newConsoleAppender()
 	case AppenderTypeFile:
-		tmp := newFileAppender(config)
-		_appenders[config.Name] = tmp
+		tmp = newFileAppender(config)
+	case AppenderTypeWeb:
+		tmp = newWebAppender()
 	default:
 		log.Fatalln("error log type ", config.Type)
+		return
 	}
-
+	tmp.SetLevel(config.Levels)
+	_appenders[config.Name] = tmp
 }
 
 func loadLogger(config LoggerConfig) {

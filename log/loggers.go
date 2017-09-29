@@ -2,6 +2,7 @@ package log
 
 import (
 	"fmt"
+	"strings"
 )
 
 //log containner
@@ -21,40 +22,45 @@ func Get(name string) *Logger {
 	return rootLog
 }
 
-func Trace(msg string) {
-	rootLog.WriteMsg(msg, LevelTrace, _fileLevel)
+func Trace(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	rootLog.WriteMsg(msg, LevelTrace, _defaultLevel)
 }
 
-func Info(msg string) {
-	rootLog.WriteMsg(msg, LevelInfo, _fileLevel)
+func Info(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	rootLog.WriteMsg(msg, LevelInfo, _defaultLevel)
 }
 
-func Warn(msg string) {
-	rootLog.WriteMsg(msg, LevelWarn, _fileLevel)
+func Warn(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	rootLog.WriteMsg(msg, LevelWarn, _defaultLevel)
 }
 
-func Debug(msg string) {
-	rootLog.WriteMsg(msg, LevelDebug, _fileLevel)
+func Debug(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	rootLog.WriteMsg(msg, LevelDebug, _defaultLevel)
 }
 
-func Error(msg string) {
-	rootLog.WriteMsg(msg, LevelError, _fileLevel)
+func Error(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	rootLog.WriteMsg(msg, LevelError, _defaultLevel)
 }
 
 func Tracef(msg string, args ...interface{}) {
-	rootLog.WriteMsgFunc(msg, LevelTrace, _fileLevel, fmt.Sprintf, args...)
+	rootLog.WriteMsgFunc(msg, LevelTrace, _defaultLevel, fmt.Sprintf, args...)
 }
 
 func Infof(msg string, args ...interface{}) {
-	rootLog.WriteMsgFunc(msg, LevelInfo, _fileLevel, fmt.Sprintf, args...)
+	rootLog.WriteMsgFunc(msg, LevelInfo, _defaultLevel, fmt.Sprintf, args...)
 }
 
 func Warnf(msg string, args ...interface{}) {
-	rootLog.WriteMsgFunc(msg, LevelWarn, _fileLevel, fmt.Sprintf, args...)
+	rootLog.WriteMsgFunc(msg, LevelWarn, _defaultLevel, fmt.Sprintf, args...)
 }
 func Debugf(msg string, args ...interface{}) {
-	rootLog.WriteMsgFunc(msg, LevelDebug, _fileLevel, fmt.Sprintf, args...)
+	rootLog.WriteMsgFunc(msg, LevelDebug, _defaultLevel, fmt.Sprintf, args...)
 }
 func Errorf(msg string, args ...interface{}) {
-	rootLog.WriteMsgFunc(msg, LevelError, _fileLevel, fmt.Sprintf, args...)
+	rootLog.WriteMsgFunc(msg, LevelError, _defaultLevel, fmt.Sprintf, args...)
 }

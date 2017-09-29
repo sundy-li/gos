@@ -15,7 +15,7 @@ func TestConfig(t *testing.T) {
                     },
                 "f" :{
                      "type" : "file",
-                     "filePath" : "G:\\aa.log",
+                     "filePath" : "aa.log",
                      "levels" : ["debug", "warn" , "error"],
                      "isDaily" : true
                 }

@@ -1,1 +1,1 @@
-## provide some tool packages for golang(log, notify, webfetch等)
+## provide some tool packages for golang(log, notify, webfetch etc...)

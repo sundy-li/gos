@@ -16,6 +16,7 @@ const (
 var (
 	AppenderTypeFile    = "file"
 	AppenderTypeConsole = "console"
+	AppenderTypeWeb     = "web"
 )
 
 var (
@@ -32,6 +33,7 @@ var (
 type Appender interface {
 	Output(msg string, level int)
 	Close()
+	SetLevel(interface{})
 }
 
 type BaseAppender struct {

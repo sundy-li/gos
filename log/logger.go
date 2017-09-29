@@ -2,13 +2,15 @@ package log
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/sundy-li/gos/utils"
 )
 
 var (
-	rootLog      = NewDefaultLogger()
-	rootAppender = newConsoleAppender()
-	_fileLevel   = 2
+	rootLog       = NewDefaultLogger()
+	rootAppender  = newConsoleAppender()
+	_defaultLevel = 2
 )
 
 type Logger struct {
@@ -57,40 +59,45 @@ func (this *Logger) WriteMsgFunc(msg string, level int, fileLevel int, f func(st
 	this.WriteMsg(f(msg, args...), level, fileLevel+1)
 }
 
-func (this *Logger) Trace(msg string) {
-	this.WriteMsg(msg, LevelTrace, _fileLevel)
+func (this *Logger) Trace(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	this.WriteMsg(msg, LevelTrace, _defaultLevel)
 }
 
-func (this *Logger) Info(msg string) {
-	this.WriteMsg(msg, LevelInfo, _fileLevel)
+func (this *Logger) Info(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	this.WriteMsg(msg, LevelInfo, _defaultLevel)
 }
 
-func (this *Logger) Warn(msg string) {
-	this.WriteMsg(msg, LevelWarn, _fileLevel)
+func (this *Logger) Warn(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	this.WriteMsg(msg, LevelWarn, _defaultLevel)
 }
 
-func (this *Logger) Debug(msg string) {
-	this.WriteMsg(msg, LevelDebug, _fileLevel)
+func (this *Logger) Debug(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	this.WriteMsg(msg, LevelDebug, _defaultLevel)
 }
 
-func (this *Logger) Error(msg string) {
-	this.WriteMsg(msg, LevelError, _fileLevel)
+func (this *Logger) Error(msgs ...string) {
+	msg := strings.Join(msgs, " ")
+	this.WriteMsg(msg, LevelError, _defaultLevel)
 }
 
 func (this *Logger) Tracef(msg string, args ...interface{}) {
-	this.WriteMsgFunc(msg, LevelTrace, _fileLevel, fmt.Sprintf, args...)
+	this.WriteMsgFunc(msg, LevelTrace, _defaultLevel, fmt.Sprintf, args...)
 }
 
 func (this *Logger) Infof(msg string, args ...interface{}) {
-	this.WriteMsgFunc(msg, LevelInfo, _fileLevel, fmt.Sprintf, args...)
+	this.WriteMsgFunc(msg, LevelInfo, _defaultLevel, fmt.Sprintf, args...)
 }
 
 func (this *Logger) Warnf(msg string, args ...interface{}) {
-	this.WriteMsgFunc(msg, LevelWarn, _fileLevel, fmt.Sprintf, args...)
+	this.WriteMsgFunc(msg, LevelWarn, _defaultLevel, fmt.Sprintf, args...)
 }
 func (this *Logger) Debugf(msg string, args ...interface{}) {
-	this.WriteMsgFunc(msg, LevelDebug, _fileLevel, fmt.Sprintf, args...)
+	this.WriteMsgFunc(msg, LevelDebug, _defaultLevel, fmt.Sprintf, args...)
 }
 func (this *Logger) Errorf(msg string, args ...interface{}) {
-	this.WriteMsgFunc(msg, LevelError, _fileLevel, fmt.Sprintf, args...)
+	this.WriteMsgFunc(msg, LevelError, _defaultLevel, fmt.Sprintf, args...)
 }
